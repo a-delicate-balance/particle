@@ -1,11 +1,11 @@
 #include <vector>
 #include <string>
-#include "editor.hpp"
+#include "app.hpp"
 
 
-class ParticleText
+class ParticleTextRenderer
 {
-  ParticleEditor* p_editor;
+  ParticleApplication* p_app;
   SDL_Texture* text = nullptr;
   SDL_Rect text_rect;
 
@@ -14,12 +14,13 @@ class ParticleText
     char key;
     SDL_Texture* char_text;
   };
-  std::vector<character> charset;
+  character charset[224];
+
+  SDL_Texture* generate_texture(std::string font_path, char* _chr);
 
 public:
-  ParticleText(ParticleEditor* p_editor);
-  ~ParticleText();
-  void generate_atlas(std::string font_path);
+  ParticleTextRenderer(ParticleApplication* p_app);
+  ~ParticleTextRenderer();  
   void load_static_text(std::string font_file, std::string str);
   void draw_static_text();
   void unload_static_text();
