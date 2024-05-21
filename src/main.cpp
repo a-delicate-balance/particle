@@ -1,3 +1,4 @@
+#include "includes.hpp"
 #include "app.hpp"
 #include "text_renderer.hpp"
 
@@ -6,8 +7,10 @@ int main()
   particle::application* app = new particle::application;
   particle::textrenderer* text_renderer = new particle::textrenderer;
 
-  SDL_Event e;
   std::string str = "hullo";
+  text_renderer->load_font("/home/parth/Projects/particle/fonts/FiraCode.ttf", 50);
+
+  SDL_Event e;
   bool quit = false;
   while(!quit)
   {
@@ -25,8 +28,11 @@ int main()
       {
         str = "key up";
       }
+      SDL_RenderClear(app->renderer);
+      text_renderer->render_text(app, str, WHITE);
+      text_renderer->display_text(app);
+      SDL_RenderPresent(app->renderer);
     }
-    text_renderer->render_text(app, str, WHITE);
 
   }
 

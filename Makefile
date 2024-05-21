@@ -1,7 +1,9 @@
 SHELL = /bin/sh
 
 PKGS=sdl2 SDL2_ttf
-CFLAGS=-Wall -Wextra -pedantic -ggdb `pkg-config --cflags $(PKGS)`
+CFLAGS=`pkg-config --cflags $(PKGS)`
+REL_CFLAGS=$(CFLAGS) -O2
+DEB_CFLAGS=$(CFLAGS) -Wall -Wextra -pedantic -ggdb
 
 INCLUDE_PATH=./include
 SRC=./src/*.cpp
@@ -17,3 +19,10 @@ clean:
 
 test:particle
 	./build/particle
+
+debug:
+	$(CXX) $(DEB_CFLAGS) -I$(INCLUDE_PATH) $< $(SRC) $(LIBS) -o ./build/particle-debug
+	# valgrind ./build/particle-debug --leak-check=full -track-origins=yes
+	
+
+
