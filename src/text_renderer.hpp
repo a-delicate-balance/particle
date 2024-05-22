@@ -3,6 +3,8 @@
 
 //#include "includes.hpp"
 #include "app.hpp"
+#include <string>
+#include <sstream>
 
 namespace particle {
 class textrenderer {
@@ -11,12 +13,13 @@ class textrenderer {
   SDL_Surface* text_surface;
   SDL_Texture* text_tex;
   SDL_Rect text_rect;
+  int font_size;
+  int font_padding = 15;
   public:
   textrenderer();
   ~textrenderer();
-  void load_font(std::string font_path, int size);
-  void render_text(application* app, std::string text, SDL_Color col);
-  void display_text(application* app);
+  void load_font(std::string font_path, int size, int padding);
+  void render_text(application* app, std::string text, SDL_Color col, SDL_Rect rect);
 };
 
 } // namespace particle
